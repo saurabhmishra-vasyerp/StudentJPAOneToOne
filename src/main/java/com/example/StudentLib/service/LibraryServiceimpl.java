@@ -41,8 +41,10 @@ public class LibraryServiceimpl implements LibraryService{
 		// TODO Auto-generated method stub
 		Library library = libraryRepository.findById(id).get();
 		LibraryDto libraryDTO = new LibraryDto();
+		libraryDTO.setBookId(library.getBookId());
 		libraryDTO.setBookName(library.getBookName());
 		libraryDTO.setBookAuthor(library.getBookAuthor());
+		
 		return libraryDTO;
 	
 	}
@@ -91,5 +93,6 @@ public class LibraryServiceimpl implements LibraryService{
 		libraryRepository.save(libraryEdit);
 		
 	}
+	
 
 }

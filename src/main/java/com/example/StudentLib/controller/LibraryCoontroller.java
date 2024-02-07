@@ -22,7 +22,7 @@ import com.example.StudentLib.service.LibraryService;
 public class LibraryCoontroller {
 	@Autowired
     private LibraryService libraryService;
-	@GetMapping("/getBook")
+	@GetMapping("/getBooks")
 	public ResponseEntity<List<LibraryDto>> get() {
 		return ResponseEntity.ok(libraryService.getAllStudents());
 	}

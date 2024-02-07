@@ -71,7 +71,7 @@ public class StudentServiceimpl implements StudentService{
 
 		studentRepository.deleteById(id);
 
-		// Convert the deleted student to DTO and return it
+		
 		return student;
 	}
 	
@@ -85,19 +85,16 @@ public class StudentServiceimpl implements StudentService{
 			student.setRollNumber(studentDto.getRollNumber());
 			student.setName(studentDto.getName());
 			student.setEmail(studentDto.getEmail());
-			//student.setNumber(studentDto.getNumber());
 			library.setBookId(studentDto.getLibraryDto().getBookId());
 			library.setBookName(studentDto.getLibraryDto().getBookName());
 			library.setBookAuthor(studentDto.getLibraryDto().getBookAuthor());
-			// Save the library first
 			libraryRepository.save(library);
-			// Set the library in the student
 			student.setBook(library);
 			// Save the student
 			studentRepository.save(student);
 		} else {
 			Optional<Student> optionalStudent = studentRepository.findById(studentDto.getId());
-//			Student studentEdit = studentRepository.findById(studentDTO.getId()).get();
+
 			if (optionalStudent.isPresent()) {
 				Student studentEdit = optionalStudent.get();
 				if (studentDto.getRollNumber() != null) {
@@ -107,7 +104,7 @@ public class StudentServiceimpl implements StudentService{
 				} else if (studentDto.getEmail() != null) {
 					studentEdit.setEmail(studentDto.getEmail());
 			} 
-				// Update library information
+				// Update
 				Library libraryEdit = studentEdit.getBook();
 				if (libraryEdit != null && studentDto.getLibraryDto() != null) {
 					libraryEdit.setBookId(studentDto.getLibraryDto().getBookId());
@@ -150,12 +147,12 @@ public class StudentServiceimpl implements StudentService{
 			studentEdit.setRollNumber(studentDto.getRollNumber());
 			studentEdit.setName(studentDto.getName());
 			studentEdit.setEmail(studentDto.getEmail());
-			//studentEdit.setNumber(studentDto.getNumber());
+			
 			library.setBookId(studentDto.getLibraryDto().getBookId());
 			library.setBookName(studentDto.getLibraryDto().getBookName());
 			library.setBookAuthor(studentDto.getLibraryDto().getBookAuthor());
 
-			// Save the library
+			
 			libraryRepository.save(library);
 			studentEdit.setBook(library);
 			studentRepository.save(studentEdit);
