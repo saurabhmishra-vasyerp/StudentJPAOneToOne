@@ -13,6 +13,7 @@ import com.example.StudentLib.Dto.LibraryDto;
 import com.example.StudentLib.Dto.StudentDto;
 import com.example.StudentLib.Repo.LibraryRepository;
 import com.example.StudentLib.Repo.StudentRepository;
+import com.example.StudentLib.exception.StudentNotFoundException;
 import com.example.StudentLib.model.Library;
 import com.example.StudentLib.model.Student;
 
@@ -34,7 +35,6 @@ public class StudentServiceimpl implements StudentService{
 			studentDto.setRollNumber(student.getRollNumber());
 			studentDto.setName(student.getName());
 		    studentDto.setEmail(student.getEmail());
-			
 			LibraryDto libraryDto = new LibraryDto();
 			libraryDto.setBookId(student.getBook().getBookId());
 			libraryDto.setBookName(student.getBook().getBookName());
@@ -48,7 +48,7 @@ public class StudentServiceimpl implements StudentService{
 	@Override
 	public StudentDto getStudentById(Long id) {
 		// TODO Auto-generated method stub
-		Student student = studentRepository.findById(id).get();
+		Student student = studentRepository.findById(id).orElseThrow(()-> new StudentNotFoundException("Student not found with id "+id));
 		StudentDto studentDto = new StudentDto();
 		studentDto.setId(student.getId());
 		studentDto.setRollNumber(student.getRollNumber());
@@ -89,7 +89,7 @@ public class StudentServiceimpl implements StudentService{
 			library.setBookName(studentDto.getLibraryDto().getBookName());
 			library.setBookAuthor(studentDto.getLibraryDto().getBookAuthor());
 			libraryRepository.save(library);
-			student.setBook(library);
+//			student.setBook(library);
 			// Save the student
 			studentRepository.save(student);
 		} else {

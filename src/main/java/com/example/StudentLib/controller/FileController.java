@@ -2,6 +2,9 @@ package com.example.StudentLib.controller;
 
 import java.io.IOException;
 
+import com.example.Student.service.StudentService;
+import com.example.Student.service.StudentServiceimpl;
+import com.example.StudentLib.model.Student;
 import com.example.StudentLib.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +40,13 @@ public class FileController {
 		//ResponseEntity<Object> response = fileService.appendToFile(fileName, Content);
 		return fileService.appendToFile(file);
 	}
+//    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+//    	Student student = new StudentService.getStudentById(id);
+//    	if(student==null) {
+//    		throw new StudentNotFoundException("Student with id "+id+ "not found");
+//    	}
+//		return ResponseEntity.ok(student);
+//    	
+//    }
 
 }

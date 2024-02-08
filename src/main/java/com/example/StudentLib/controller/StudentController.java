@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.StudentLib.Dto.ResponseDTO;
 import com.example.StudentLib.Dto.StudentDto;
+import com.example.StudentLib.exception.StudentNotFoundException;
 import com.example.StudentLib.service.StudentService;
 
 @RequestMapping("/api")
@@ -28,16 +30,22 @@ public class StudentController {
 		return ResponseEntity.ok(studentService.getAllStudents());
 	}
 	
+//	@GetMapping("/{id}")
+//	public ResponseEntity<?> getStudentById(@PathVariable Long id) {
+//		try {
+//			StudentDto studentDto = studentService.getStudentById(id);
+//			System.out.println("Id is found " + id);
+//			return ResponseEntity.ok(studentDto);
+//		} catch (Exception e) {
+//			System.out.println("Id " + id + " is not found");
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id " + id + " is Not Found");
+//		}
+//	}
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getStudentById(@PathVariable Long id) {
-		try {
-			StudentDto studentDto = studentService.getStudentById(id);
-			System.out.println("Id is found " + id);
-			return ResponseEntity.ok(studentDto);
-		} catch (Exception e) {
-			System.out.println("Id " + id + " is not found");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id " + id + " is Not Found");
-		}
+	public ResponseDTO getStudentId(@PathVariable long id){
+		StudentDto studentDto = studentService.getStudentById(id);
+		return new ResponseDTO(200, "Success", studentDto);
+		
 	}
 
 	@PostMapping("/add")
